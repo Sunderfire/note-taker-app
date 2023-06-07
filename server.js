@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const db = require('./db/db.json');
+const fs = require('fs');
 
 const PORT = 3001;
 
@@ -21,8 +23,19 @@ app.get('/notes', (req, res) =>
 );
 
 app.get('/api/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/db/db.json'))
+  res.json(db)
 );
+
+app.post('/api/notes', (req, res) => {
+  //const title = req.body.title;
+  //const text = req.body.text;
+  const {title, text} = req.body;
+  const newNote = {title, text};
+  db.push(newNote);
+  fs.writeFileSync("db/db.json", JSON.stringify(db))
+  res.json(db);
+})
+  
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
