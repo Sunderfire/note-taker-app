@@ -61,8 +61,8 @@ const renderActiveNote = () => {
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
-    noteTitle.value = '';
-    noteText.value = '';
+    noteTitle.value = activeNote.title;
+    noteText.value = activeNote.text;
   }
 };
 

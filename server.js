@@ -27,8 +27,6 @@ app.get('/api/notes', (req, res) =>
 );
 
 app.post('/api/notes', (req, res) => {
-  //const title = req.body.title;
-  //const text = req.body.text;
   const {title, text} = req.body;
   const newNote = {title, text};
   db.push(newNote);
